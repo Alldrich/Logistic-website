@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    swcMinify: true,
+import withBundleAnalyzer from '@next/bundle-analyzer'
+
+
+const withBundleAnalyzerConfig = withBundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
+  });
+
+const nextConfig = withBundleAnalyzerConfig({
     images:{
         remotePatterns: [
             {
@@ -11,6 +17,6 @@ const nextConfig = {
             }
         ]
     },
-}
+})
 
 export default nextConfig
