@@ -41,7 +41,7 @@ export function TrackForm() {
           if (!valid) return;
           return submitAction(formData);
         }}
-        className="w-2/3 space-y-6"
+        className="w-2/3 space-y-6 flex-col"
       >
         <FormField
           control={form.control}
@@ -50,7 +50,7 @@ export function TrackForm() {
             <FormItem>
               {/* <FormLabel className="">Tracking Number</FormLabel> */}
               <FormControl>
-                <Input className=" bg-slate-200 inline-flex items-center justify-center w-96" placeholder="Tracking Number" {...field} />
+                <Input className=" bg-slate-200" placeholder="Tracking Number" {...field} />
               </FormControl>
               {/* <FormDescription >
                 Enter the parcel tracking number.
@@ -59,7 +59,7 @@ export function TrackForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Track</Button>
+        <Button type="submit" className="">Track</Button>
       </form>
     </Form>
   );

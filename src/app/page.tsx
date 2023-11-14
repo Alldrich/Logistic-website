@@ -3,7 +3,7 @@ import { TrackForm } from "@/components/component/track_form";
 import dl from "@/assets/delivery_guy_min.jpg";
 export default function Home() {
   return (
-      <main className="flex-1">
+      <main className="flex-1 bg-background text-foreground">
         <section className="relative h-[500px] overflow-hidden bg-gray-200">
           <Image
             alt="Background"
@@ -129,7 +129,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="py-12 px-6 bg-zinc-100">
+        <section className="py-12 px-6 bg-zinc-100 bg-background text-foreground">
           <h2 className="text-2xl font-bold mb-6">Testimonials</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div className="flex flex-col items-start space-y-2">
