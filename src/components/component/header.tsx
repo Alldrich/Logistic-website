@@ -6,7 +6,7 @@ export default function Header() {
       <header className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-4">
           <svg
-            className=" h-8 w-8 text-zinc-600"
+            className=" h-8 w-8 text-muted-foreground"
             fill="none"
             height="24"
             stroke="currentColor"

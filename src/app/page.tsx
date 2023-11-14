@@ -4,28 +4,19 @@ import dl from "@/assets/delivery_guy_min.jpg";
 export default function Home() {
   return (
       <main className="flex-1 bg-background text-foreground">
-        <section className="relative h-[500px] overflow-hidden bg-gray-200">
+        <section className="relative h-[500px] overflow-hidden">
           <Image
             alt="Background"
             className="object-cover w-full h-full"
             height="500"
             src={dl}
-            style={{
-              objectFit: "cover",
-            }}
             width="1000"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center space-y-4 text-center">
-            <h1 className="text-4xl font-bold text-white">
+          <div className=" absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center space-y-4 text-center">
+            <h1 className="text-4xl font-bold">
               Track your shipment
             </h1>
-            {/* <form className="flex items-center space-x-4">
-              <Button className="flex-grow h-12" placeholder="Enter tracking number" type="text" />
-              <Button className="px-6 py-3 text-xl" type="submit">
-                Track
-              </Button>
-            </form> */}
-            <TrackForm />
+            <TrackForm className=" bg-background/90" />
           </div>
         </section>
         <section className="py-12 px-6">
@@ -33,7 +24,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="flex items-start space-x-4">
               <svg
-                className=" h-8 w-8 text-zinc-600"
+                className=" h-8 w-8 text-muted-foreground"
                 fill="none"
                 height="24"
                 stroke="currentColor"
@@ -52,14 +43,14 @@ export default function Home() {
               </svg>
               <div>
                 <h3 className="text-lg font-bold">Express Shipping</h3>
-                <p className="text-sm text-zinc-600">
+                <p className="text-sm text-muted-foreground">
                   Fast and reliable delivery service.
                 </p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
               <svg
-                className=" h-8 w-8 text-zinc-600"
+                className=" h-8 w-8 text-muted-foreground"
                 fill="none"
                 height="24"
                 stroke="currentColor"
@@ -76,14 +67,14 @@ export default function Home() {
               </svg>
               <div>
                 <h3 className="text-lg font-bold">International Shipping</h3>
-                <p className="text-sm text-zinc-600">
+                <p className="text-sm text-muted-foreground">
                   Delivering packages across the globe.
                 </p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
               <svg
-                className=" h-8 w-8 text-zinc-600"
+                className=" h-8 w-8 text-muted-foreground"
                 fill="none"
                 height="24"
                 stroke="currentColor"
@@ -99,14 +90,14 @@ export default function Home() {
               </svg>
               <div>
                 <h3 className="text-lg font-bold">Same Day Delivery</h3>
-                <p className="text-sm text-zinc-600">
+                <p className="text-sm text-muted-foreground">
                   Express delivery within the same day.
                 </p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
               <svg
-                className=" h-8 w-8 text-zinc-600"
+                className=" h-8 w-8 text-muted-foreground"
                 fill="none"
                 height="24"
                 stroke="currentColor"
@@ -122,32 +113,32 @@ export default function Home() {
               </svg>
               <div>
                 <h3 className="text-lg font-bold">Insured Shipment</h3>
-                <p className="text-sm text-zinc-600">
+                <p className="text-sm text-muted-foreground">
                   Secure and insured shipments.
                 </p>
               </div>
             </div>
           </div>
         </section>
-        <section className="py-12 px-6 bg-zinc-100 bg-background text-foreground">
+        <section className="py-12 px-6 bg-background text-foreground">
           <h2 className="text-2xl font-bold mb-6">Testimonials</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div className="flex flex-col items-start space-y-2">
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 The shipping was fast and the package arrived in perfect
                 condition. Highly recommended.
               </p>
-              <p className="text-sm font-bold">- John Doe</p>
+              <p className="text-sm font-bold ">- John Doe</p>
             </div>
             <div className="flex flex-col items-start space-y-2">
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 Great service! They were very helpful and the delivery was on
                 time.
               </p>
               <p className="text-sm font-bold">- Jane Smith</p>
             </div>
             <div className="flex flex-col items-start space-y-2">
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 Parcel Co. is the best shipping company I`&apos;`ve worked with.
                 Fantastic customer service.
               </p>
@@ -164,7 +155,7 @@ export default function Home() {
               <summary className="text-lg font-bold cursor-pointer">
                 How to track my package?
               </summary>
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 You can track your package using the tracking number provided to
                 you at the time of shipment.
               </p>
@@ -173,7 +164,7 @@ export default function Home() {
               <summary className="text-lg font-bold cursor-pointer">
                 What is the delivery time?
               </summary>
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 The delivery time depends on the type of service you choose.
                 Express shipping usually delivers within 1-3 business days.
               </p>
@@ -182,7 +173,7 @@ export default function Home() {
               <summary className="text-lg font-bold cursor-pointer">
                 What is insured shipment?
               </summary>
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted-foreground">
                 Insured shipment provides extra security for your package. If
                 the package is lost or damaged, you will receive full
                 compensation.
@@ -191,5 +182,6 @@ export default function Home() {
           </div>
         </section>
       </main>
+      
   );
 }

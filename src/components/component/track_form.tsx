@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { submitAction } from "@/lib/form_action";
+import { submitAction } from "@/lib/form_action"
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input , InputProps } from "@/components/ui/input";
 
 const FormSchema = z.object({
   track_number: z.string().min(10, {
@@ -23,7 +23,7 @@ const FormSchema = z.object({
   }),
 });
 
-export function TrackForm() {
+export function TrackForm({className}: InputProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -50,7 +50,7 @@ export function TrackForm() {
             <FormItem>
               {/* <FormLabel className="">Tracking Number</FormLabel> */}
               <FormControl>
-                <Input className=" bg-slate-200" placeholder="Tracking Number" {...field} />
+                <Input className={className}  placeholder="Tracking Number" {...field} />
               </FormControl>
               {/* <FormDescription >
                 Enter the parcel tracking number.
