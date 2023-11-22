@@ -1,5 +1,10 @@
 node_modules
 .next
 *.scss
+*.css
+*.yaml
+next.config.mjs
+tailwind.config.ts
+postcss.config.js
 *.json
 *.md
