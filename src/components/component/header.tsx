@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function Header() {
   return (
@@ -24,7 +24,7 @@ export default function Header() {
           </svg>
           <span className="text-xl font-bold">Parcel Co.</span>
         </div>
-        <nav className="flex space-x-4 ml-auto">
+        <nav className="ml-auto flex space-x-4">
           <Link className="text-base font-medium hover:underline" href="#">
             Home
           </Link>
@@ -40,5 +40,5 @@ export default function Header() {
         </nav>
       </header>
     </section>
-  );
+  )
 }
