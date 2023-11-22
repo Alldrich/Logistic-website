@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ModeToggle } from '@/components/component/theme_switcher'
 
 export default function Footer() {
     return (
@@ -93,6 +94,7 @@ export default function Footer() {
               © Parcel Co. All rights reserved.
             </p>
           </div>
+          <ModeToggle />
         </footer>
     );
 }

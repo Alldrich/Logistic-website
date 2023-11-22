@@ -32,7 +32,7 @@ export default function RootLayout({
               <Header />
               {children}
               <Footer />
-              <ModeToggle />
+              {/* <ModeToggle /> */}
             </div>
             </ThemeProvider>
         </body>
