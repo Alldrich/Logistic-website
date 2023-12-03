@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import Footer from '@/components/component/footer'
-import Header from '@/components/component/header'
+import { Footer } from '@/components/component/footer'
+import { Header } from '@/components/component/header'
 import { ThemeProvider } from '@/components/component/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,12 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <div>
-            <Header />
-            {children}
-            <Footer />
-            {/* <ModeToggle /> */}
-          </div>
+          <Header />
+          <div>{children}</div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

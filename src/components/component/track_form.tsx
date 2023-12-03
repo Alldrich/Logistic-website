@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input, InputProps } from '@/components/ui/input'
+import { Input, type InputProps } from '@/components/ui/input'
 
 const FormSchema = z.object({
   track_number: z.string().min(10, {

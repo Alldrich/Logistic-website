@@ -11,6 +11,8 @@ export default function Home() {
           height="500"
           src={dl}
           width="1000"
+          quality={50}
+          priority
         />
         <div className=" absolute inset-0 flex flex-col items-center justify-center space-y-4 bg-black bg-opacity-50 text-center">
           <h1 className="text-4xl font-bold">Track your shipment</h1>

@@ -17,6 +17,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        swgray: 'oklch(28.01% 0 0 / <alpha-value>)',
         border: 'oklch(var(--border) / <alpha-value>)',
         input: 'oklch(var(--input) / <alpha-value>)',
         ring: 'oklch(var(--ring) / <alpha-value>)',

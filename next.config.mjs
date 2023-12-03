@@ -6,6 +6,7 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 })
 
 const nextConfig = withBundleAnalyzerConfig({
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -16,6 +17,10 @@ const nextConfig = withBundleAnalyzerConfig({
       },
     ],
   },
+  experimental:{
+    typedRoutes:true,
+    optimizePackageImports:['@radix-ui/react-dropdown-menu','@radix-ui/react-icons','@radix-ui/react-label','@radix-ui/react-slot','@hookform/resolvers','react-hook-form'],
+  }
 })
 
 export default nextConfig
