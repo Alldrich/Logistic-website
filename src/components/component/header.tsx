@@ -27,13 +27,13 @@ export function Header() {
         <Link className="text-base font-medium hover:underline" href="#">
           Home
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#">
+        <Link className="text-base font-medium hover:underline" href="#service">
           Services
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#">
+        <Link className="text-base font-medium hover:underline" href="#testimonials">
           Testimonials
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#">
+        <Link className="text-base font-medium hover:underline" href="#faq">
           FAQ
         </Link>
       </nav>

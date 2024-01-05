@@ -19,7 +19,7 @@ export default function Home() {
           <TrackForm className=" bg-background/90" />
         </div>
       </section>
-      <section className="px-6 py-12">
+      <section id="service" className="px-6 py-12">
         <h2 className="mb-6 text-2xl font-bold">Our Services</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex items-start space-x-4">
@@ -112,7 +112,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-background px-6 py-12 text-foreground">
+      <section id="testimonials" className="bg-background px-6 py-12 text-foreground">
         <h2 className="mb-6 text-2xl font-bold">Testimonials</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           <div className="flex flex-col items-start space-y-2">
@@ -137,7 +137,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="px-6 py-12">
+      <section id="faq" className="px-6 py-12">
         <h2 className="mb-6 text-2xl font-bold">Frequently Asked Questions</h2>
         <div className="space-y-4">
           <details>

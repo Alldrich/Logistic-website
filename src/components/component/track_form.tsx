@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { submitAction } from '@/lib/form_action'
-
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -31,13 +30,12 @@ export function TrackForm({ className }: InputProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
-
   return (
     <Form {...form}>
       <form
         action={async (formData: FormData) => {
           const valid = await form.trigger()
+          console.log('Button is clicked')
           if (!valid) return
           return submitAction(formData)
         }}
