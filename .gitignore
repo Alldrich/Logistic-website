@@ -37,3 +37,7 @@ next-env.d.ts
 
 # bundle analyzer
 /analyze
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

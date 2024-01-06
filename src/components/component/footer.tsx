@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import { ModeToggle } from '@/components/component/theme_switcher'
-import { getCookieTheme } from '@/lib/theme_cookie'
+//import { getCookieTheme } from '@/lib/theme_cookie'
+import dynamic from 'next/dynamic'
+import { ThemeButton } from './theme-button'
 
-export async function Footer() {
-  const theme = await getCookieTheme()
+export function Footer() {
+  // const theme = await getCookieTheme()
   return (
     <footer className="bg-background px-6 py-4 text-foreground">
       <div className="flex items-center justify-between">
@@ -47,7 +48,9 @@ export async function Footer() {
       </div>
       <div className="mt-4 flex items-center justify-between">
         <div className="flex space-x-4">
-          <ModeToggle cookie_theme={theme} />
+          {/* <ModeToggle cookie_theme={theme} /> */}
+          {/* <ModeToggle /> */}
+          <ThemeButton />
         </div>
         <p className="text-sm text-muted-foreground">© Parcel Co. All rights reserved.</p>
       </div>
