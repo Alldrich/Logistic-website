@@ -15,6 +15,12 @@ const nextConfig = withBundleAnalyzerConfig({
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
   experimental:{
