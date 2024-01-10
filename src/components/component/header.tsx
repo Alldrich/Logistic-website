@@ -24,16 +24,16 @@ export function Header() {
         <span className="text-xl font-bold">Parcel Co.</span>
       </div>
       <nav className="ml-auto flex space-x-4">
-        <Link className="text-base font-medium hover:underline" href="#">
+        <Link className="text-base font-medium hover:underline" href="/#">
           Home
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#service">
+        <Link className="text-base font-medium hover:underline" href="/#service">
           Services
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#testimonials">
+        <Link className="text-base font-medium hover:underline" href="/#testimonials">
           Testimonials
         </Link>
-        <Link className="text-base font-medium hover:underline" href="#faq">
+        <Link className="text-base font-medium hover:underline" href="/#faq">
           FAQ
         </Link>
       </nav>
