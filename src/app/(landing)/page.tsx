@@ -3,11 +3,11 @@ import { TrackForm } from '@/components/component/track_form'
 import dl from '@/assets/delivery_guy_min.jpg'
 export default function Home() {
   return (
-    <main className="flex-1 bg-background text-foreground">
+    <>
       <section className="relative h-[500px] overflow-hidden">
         <Image
           alt="Background"
-          className="h-full w-full object-cover"
+          className="h-full w-full overflow-hidden object-fill"
           height="500"
           src={dl}
           width="1000"
@@ -167,6 +167,6 @@ export default function Home() {
           </details>
         </div>
       </section>
-    </main>
+    </>
   )
 }
