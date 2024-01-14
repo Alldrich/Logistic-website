@@ -23,9 +23,14 @@ const nextConfig = withBundleAnalyzerConfig({
       }
     ],
   },
+  logging:{
+    fetches:{
+      fullUrl:true
+    }
+  },
   experimental:{
     typedRoutes:true,
-    optimizePackageImports:['@radix-ui/react-dropdown-menu','@radix-ui/react-icons','@radix-ui/react-label','@radix-ui/react-slot','@hookform/resolvers','react-hook-form'],
+    optimizePackageImports:['@radix-ui/react-dropdown-menu','@radix-ui/react-icons','@radix-ui/react-label','@radix-ui/react-slot','@hookform/resolvers','react-hook-form','@tremor/react'],
   }
 })
 

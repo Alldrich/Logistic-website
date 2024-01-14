@@ -70,7 +70,7 @@ export function ThemeButton() {
             className={`${selectedThemes(
               'system',
               theme,
-            )} flex h-8 w-8 items-center justify-center rounded-[inherit] px-0 py-0`}
+            )} h-8 w-8 flex-auto items-center justify-center rounded-[inherit] px-0 py-0`}
             onClick={() => setTheme('system')}
             variant={'switcher'}
             aria-checked={theme === 'system'}
@@ -100,7 +100,7 @@ export function ThemeButton() {
             className={`${selectedThemes(
               'dark',
               theme,
-            )} flex h-8 w-8 items-center justify-center rounded-[inherit] px-0 py-0`}
+            )} h-8 w-8 flex-auto items-center justify-center rounded-[inherit] px-0 py-0`}
             onClick={() => setTheme('dark')}
             variant={'switcher'}
             aria-checked={theme === 'dark'}
