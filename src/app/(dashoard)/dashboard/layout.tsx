@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { Footer } from '@/components/component/footer'
-import { Header } from '@/components/component/header'
 import { ThemeProvider } from '@/components/component/theme-provider'
-
+import { MainDashboardNav } from '@/components/component/dashboard/dashboard-nav'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <div>{children}</div>
+          <MainDashboardNav>{children}</MainDashboardNav>
           <Footer />
         </ThemeProvider>
       </body>

@@ -3,23 +3,25 @@ import { TrackForm } from '@/components/component/track_form'
 import dl from '@/assets/delivery_guy_min.jpg'
 export default function Home() {
   return (
-    <>
-      <section className="relative h-[500px] overflow-hidden">
-        <Image
-          alt="Background"
-          className="h-full w-full overflow-hidden object-fill"
-          height="500"
-          src={dl}
-          width="1000"
-          quality={50}
-          priority
-        />
-        <div className=" absolute inset-0 flex flex-col items-center justify-center space-y-4 bg-black bg-opacity-50 text-center">
-          <h1 className="text-4xl font-bold">Track your shipment</h1>
-          <TrackForm className=" bg-background/90" />
-        </div>
-      </section>
-      <section id="service" className="px-6 py-12">
+    <div className="px-4">
+      <div className="flex min-h-[140px] w-full place-content-center p-3">
+        <section className=" relative h-[500px] w-[1200px] self-center overflow-hidden rounded-lg">
+          <Image
+            alt="Background"
+            className="m-auto h-full w-full overflow-hidden object-cover"
+            height="500"
+            src={dl}
+            width="1000"
+            quality={50}
+            priority
+          />
+          <div className=" absolute inset-0 flex flex-col items-center justify-center space-y-4 bg-black bg-opacity-50 text-center">
+            <h1 className="text-4xl font-bold text-white/80">Track your shipment</h1>
+            <TrackForm className=" bg-background/90" />
+          </div>
+        </section>
+      </div>
+      <section id="service" className="m-auto px-6 py-12">
         <h2 className="mb-6 text-2xl font-bold">Our Services</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex items-start space-x-4">
@@ -112,7 +114,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="testimonials" className="bg-background px-6 py-12 text-foreground">
+      <section id="testimonials" className="m-auto bg-background px-6 py-12 text-foreground">
         <h2 className="mb-6 text-2xl font-bold">Testimonials</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           <div className="flex flex-col items-start space-y-2">
@@ -167,6 +169,6 @@ export default function Home() {
           </details>
         </div>
       </section>
-    </>
+    </div>
   )
 }
