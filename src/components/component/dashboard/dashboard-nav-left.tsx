@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { PackageIcon, HomeIcon, UsersIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import clsx from 'clsx'
 
 export function LeftNav() {
   const pathname = usePathname()

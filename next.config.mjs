@@ -6,7 +6,6 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 })
 
 const nextConfig = withBundleAnalyzerConfig({
-  swcMinify: true,
   images: {
     remotePatterns: [
       {

@@ -8,11 +8,10 @@ export default function Home() {
         <section className=" relative h-[500px] w-[1200px] self-center overflow-hidden rounded-lg">
           <Image
             alt="Background"
-            className="m-auto h-full w-full overflow-hidden object-cover"
+            className="m-auto h-full w-full object-cover"
             height="500"
             src={dl}
             width="1000"
-            quality={50}
             priority
           />
           <div className=" absolute inset-0 flex flex-col items-center justify-center space-y-4 bg-black bg-opacity-50 text-center">
