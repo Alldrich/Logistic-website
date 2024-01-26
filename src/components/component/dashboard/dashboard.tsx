@@ -14,7 +14,7 @@ export function Component() {
       <div className="flex items-center">
         <h1 className="text-lg font-semibold md:text-2xl">Recent Shipments</h1>
       </div>
-      <div className="rounded-lg border shadow-sm">
+      <div className=" rounded-lg border shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>

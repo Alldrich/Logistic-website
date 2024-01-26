@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { Footer } from '@/components/component/footer'
 import { Header } from '@/components/component/header'
 import { ThemeProvider } from '@/components/component/theme-provider'
-
-const inter = Inter({ subsets: ['latin'] })
+import { inter } from '@/components/font'
 
 export const metadata: Metadata = {
   title: ' Cargo - Global Logistics and International Shipping',

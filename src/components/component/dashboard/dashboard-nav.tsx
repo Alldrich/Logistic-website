@@ -15,7 +15,7 @@ import { LeftNav } from './dashboard-nav-left'
 import { MobileNav } from './dashboard-nav-mobile'
 export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
   return (
-    <main key="1" className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
+    <main key="1" className=" grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="dark:to-dark hidden border-r bg-gradient-to-b from-gray-100/40 to-white dark:bg-gradient-to-b dark:from-gray-800/40 lg:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-[60px] items-center border-b px-6">
