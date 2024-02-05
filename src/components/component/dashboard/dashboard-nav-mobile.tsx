@@ -4,9 +4,34 @@ import { useState } from 'react'
 import Link, { type LinkProps } from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Package, PackageIcon } from 'lucide-react'
+import {
+  Package,
+  PackageIcon,
+  type LucideIcon,
+  HomeIcon,
+  UsersIcon,
+  NewspaperIcon,
+  ArrowUpRightSquareIcon,
+} from 'lucide-react'
 import type { Route } from 'next'
 import { usePathname } from 'next/navigation'
+
+type LinkGroup = LinkProps<Route> & {
+  name: string
+  icon: LucideIcon
+}
+
+const links: LinkGroup[] = [
+  {
+    name: 'Employees',
+    href: '/dashboard/employees',
+    icon: UsersIcon,
+  },
+  { name: 'Customers', href: '/dashboard/customers', icon: UsersIcon },
+  { name: 'Offices', href: '/dashboard/offices', icon: HomeIcon },
+  { name: 'Shipments', href: '/dashboard/shipments', icon: PackageIcon },
+  { name: 'Inquiries', href: '/dashboard/inquiries', icon: NewspaperIcon },
+]
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -29,63 +54,31 @@ export function MobileNav() {
         </MobileLink>
         <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
-            <MobileLink href={'/'} onOpenChange={setOpen}>
-              <span className="text-lg">Homepage</span>
-            </MobileLink>
+            {links.map(link => {
+              // const LinkIcon = link.icon;
+              return (
+                <MobileLink
+                  key={link.name}
+                  href={link.href}
+                  className={`${
+                    pathname === link.href
+                      ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
+                      : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
+                  }`}
+                  onOpenChange={setOpen}
+                >
+                  {/* <LinkIcon className='h-6 w-6'/> */}
+                  <span className="text-lg">{link.name}</span>
+                </MobileLink>
+              )
+            })}
             <MobileLink
-              href={'/dashboard/employees'}
-              className={`${
-                pathname === '/dashboard/employees'
-                  ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
-                  : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
-              }`}
+              className="flex h-10 items-center text-lg"
+              href={'/'}
               onOpenChange={setOpen}
             >
-              <span className="text-lg">Employees</span>
-            </MobileLink>
-            <MobileLink
-              href={'/dashboard/company'}
-              className={`${
-                pathname === '/dashboard/company'
-                  ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
-                  : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
-              }`}
-              onOpenChange={setOpen}
-            >
-              <span className="text-lg">Company</span>
-            </MobileLink>
-            <MobileLink
-              href={'/dashboard/customers'}
-              className={`${
-                pathname === '/dashboard/customers'
-                  ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
-                  : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
-              }`}
-              onOpenChange={setOpen}
-            >
-              <span className="text-lg">Customers</span>
-            </MobileLink>
-            <MobileLink
-              href={'/dashboard/offices'}
-              className={`${
-                pathname === '/dashboard/offices'
-                  ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
-                  : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
-              }`}
-              onOpenChange={setOpen}
-            >
-              <span className="text-lg">Offices</span>
-            </MobileLink>
-            <MobileLink
-              href={'/dashboard/shipments'}
-              className={`${
-                pathname === '/dashboard/shipments'
-                  ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'
-                  : 'text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
-              }`}
-              onOpenChange={setOpen}
-            >
-              <span className="text-lg">Shipments</span>
+              <span className="text-xl">Parcel Homepage</span>
+              <ArrowUpRightSquareIcon className="mx-3 h-4 w-4 place-items-end" />
             </MobileLink>
           </div>
         </div>
