@@ -4,6 +4,7 @@ import { Footer } from '@/components/component/footer'
 import { Header } from '@/components/component/header'
 import { ThemeProvider } from '@/components/component/theme-provider'
 import { inter } from '@/components/font'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: ' Cargo - Global Logistics and International Shipping',

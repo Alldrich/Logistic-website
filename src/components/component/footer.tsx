@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ThemeButton } from './theme-button'
 import { Package } from 'lucide-react'
+import { Suspense } from 'react'
 
 export function Footer() {
   return (
@@ -102,7 +103,9 @@ export function Footer() {
             </a>
             . All Rights Reserved.
           </span>
-          <ThemeButton />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ThemeButton />
+          </Suspense>
         </div>
       </div>
     </footer>

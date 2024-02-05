@@ -11,3 +11,7 @@ const FormSchema = z.object({
 export async function submitAction(data: FormData) {
   console.log('submitAction', data)
 }
+
+export async function changeShipmentData(data: FormData) {
+  console.log('changeShipmentData', data)
+}

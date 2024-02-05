@@ -4,6 +4,7 @@ import { Footer } from '@/components/component/footer'
 import { ThemeProvider } from '@/components/component/theme-provider'
 import { MainDashboardNav } from '@/components/component/dashboard/dashboard-nav'
 import { inter } from '@/components/font'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: ' Cargo - Global Logistics and International Shipping',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <MainDashboardNav>{children}</MainDashboardNav>
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
