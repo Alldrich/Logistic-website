@@ -12,6 +12,7 @@ import {
   UsersIcon,
   NewspaperIcon,
   ArrowUpRightSquareIcon,
+  Building2Icon,
 } from 'lucide-react'
 import type { Route } from 'next'
 import { usePathname } from 'next/navigation'
@@ -22,6 +23,11 @@ type LinkGroup = LinkProps<Route> & {
 }
 
 const links: LinkGroup[] = [
+  {
+    name: 'Company',
+    href: '/dashboard/company',
+    icon: Building2Icon,
+  },
   {
     name: 'Employees',
     href: '/dashboard/employees',

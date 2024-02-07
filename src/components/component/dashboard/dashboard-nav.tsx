@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '../../ui/button'
+import { Button } from '@/components/ui/button'
 import { PackageIcon, BellIcon, SearchIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import {
@@ -11,8 +11,9 @@ import {
   DropdownMenu,
 } from '@/components/ui/dropdown-menu'
 import Image from 'next/image'
-import { LeftNav } from './dashboard-nav-left'
-import { MobileNav } from './dashboard-nav-mobile'
+import { LeftNav } from '@/components/component/dashboard/dashboard-nav-left'
+import { MobileNav } from '@/components/component/dashboard/dashboard-nav-mobile'
+import { UserNav } from '@/components/component/user-nav'
 export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
   return (
     <main key="1" className=" grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
@@ -37,8 +38,7 @@ export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
             <PackageIcon className="h-6 w-6" />
             <span className="sr-only">Home</span>
           </Link> */}
-          <MobileNav />
-          <div className="w-full flex-1">
+          {/* <div className="w-full flex-1">
             <form>
               <div className="relative">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
@@ -49,37 +49,11 @@ export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
                 />
               </div>
             </form>
+          </div> */}
+          <div className="w-full flex-1">
+            <MobileNav />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                className="h-8 w-8 rounded-full border border-gray-200 dark:border-gray-800"
-                size="icon"
-                variant="ghost"
-              >
-                <Image
-                  alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                  style={{
-                    aspectRatio: '32/32',
-                    objectFit: 'cover',
-                  }}
-                  width="32"
-                />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserNav />
         </header>
         {children}
       </div>
