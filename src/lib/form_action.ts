@@ -15,3 +15,7 @@ export async function submitAction(data: FormData) {
 export async function changeShipmentData(data: FormData) {
   console.log('changeShipmentData', data)
 }
+
+export async function changeCustomerData(data: FormData) {
+  console.log('changeCustomerData', data)
+}

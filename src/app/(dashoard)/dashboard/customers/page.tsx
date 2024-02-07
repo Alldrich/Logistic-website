@@ -1,3 +1,12 @@
+import { CustomerPage } from '@/components/component/dashboard/customers/page-data'
+import { Suspense } from 'react'
+
 export default function Customers() {
-  return <h1>Customers</h1>
+  return (
+    <div className="container mx-auto py-10">
+      <Suspense fallback={<div>Loading...</div>}>
+        <CustomerPage />
+      </Suspense>
+    </div>
+  )
 }

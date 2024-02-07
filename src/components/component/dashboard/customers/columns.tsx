@@ -1,39 +1,13 @@
 'use client'
 
 import { type ColumnDef } from '@tanstack/react-table'
-import type { Packages } from '@/types/dashboard'
-import { ShipmentTableActions } from './table-action'
+import type { Customers } from '@/types/dashboard'
+import { CustomerTableActions } from './table-action'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-
-// export const columns: ColumnDef<Packages>[] = [
-//   {
-//     accessorKey: "status",
-//     header: "Status",
-//   },
-//   {
-//     accessorKey: "createdAt",
-//     header: "CreatedAt",
-//   },
-//   {
-//     accessorKey: "weight",
-//     header: "Weight",
-//   },
-//   {
-//     accessorKey: "Sender",
-//     header: "Sender"
-//   },
-//   {
-//     accessorKey: "Resiver",
-//     header: "Resiver"
-//   }
-// ]
-
-export const shipmentColumns: ColumnDef<Packages>[] = [
+export const customersColumns: ColumnDef<Customers>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -56,63 +30,28 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
-  },
-  {
-    accessorKey: 'Sender',
+    accessorKey: 'name',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Sender
+          Name
           <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('Sender')}</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
   },
   {
-    accessorKey: 'weight',
-    header: () => <div className="">Weight</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('weight'))
-
-      return <div className="font-medium">{amount}</div>
-    },
+    accessorKey: 'email',
+    cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
   },
   {
-    accessorKey: 'Resiver',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Resiver
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('Resiver')}</div>,
-  },
-  {
-    accessorKey: 'adress',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Adress
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('adress')}</div>,
+    accessorKey: 'createdAt',
+    header: () => <div className="">Date of Creation</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('createdAt')}</div>,
   },
   {
     id: 'actions',
@@ -140,7 +79,7 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
         //     <DropdownMenuItem>View payment details</DropdownMenuItem>
         //   </DropdownMenuContent>
         // </DropdownMenu>
-        <ShipmentTableActions data={payment} />
+        <CustomerTableActions data={payment} />
       )
     },
   },

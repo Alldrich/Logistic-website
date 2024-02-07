@@ -34,51 +34,36 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import type { Packages } from '@/types/dashboard'
-import { changeShipmentData } from '@/lib/form_action'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import type { Customers } from '@/types/dashboard'
+import { changeCustomerData } from '@/lib/form_action'
 
 const formSchema = z.object({
-  sender_email: z.string().min(2, {
+  name: z.string().min(2, {
     message: 'Please enter a valid email address.',
   }),
-  receiver_email: z.string().min(2, {
+  email: z.string().min(2, {
     message: 'Please enter a valid email address.',
   }),
-  adress: z.string().min(10, {
-    message: 'Adress must be at least 2 characters.',
-  }),
-  weight: z.string().min(1, {
-    message: 'Weight must be at least 1.',
-  }),
-  to_office: z.string().refine(val => val === 'true' || val === 'false'),
 })
 
 async function handleSubmit(data: z.infer<typeof formSchema>) {
   let formData = new FormData()
-  formData.append('sender_email', data.sender_email)
-  formData.append('receiver_email', data.receiver_email)
-  formData.append('adress', data.adress)
-  formData.append('weight', String(data.weight))
-  formData.append('to_office', data.to_office)
-  await changeShipmentData(formData)
+  formData.append('name', data.name)
+  formData.append('email', data.email)
+  await changeCustomerData(formData)
 }
 
-export function PresetActions({ data }: { data: Packages }) {
+export function CustomerTableActions({ data }: { data: Customers }) {
   const [showEditDialog, setEditDialog] = React.useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      sender_email: data.Sender,
-      receiver_email: data.Resiver,
-      adress: data.adress,
-      weight: String(data.weight),
-      to_office: String(data.ToOffice),
+      name: '',
+      email: '',
     },
   })
   const formButtonRef = React.useRef<HTMLButtonElement>(null)
-  const formRef = React.useRef<HTMLFormElement>(null)
   return (
     <>
       <DropdownMenu>
@@ -95,7 +80,7 @@ export function PresetActions({ data }: { data: Packages }) {
               navigator.clipboard.writeText(data.id)
             }}
           >
-            Copy shipment ID
+            Copy client ID
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setEditDialog(true)}>Edit</DropdownMenuItem>
@@ -111,15 +96,15 @@ export function PresetActions({ data }: { data: Packages }) {
           </AlertDialogHeader>
           <>
             <Form {...form}>
-              <form ref={formRef} onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
                 <FormField
                   control={form.control}
-                  name="sender_email"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Sender email</FormLabel>
+                      <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="name" {...field} />
                       </FormControl>
                       {/* <FormDescription>This is your public display name.</FormDescription> */}
                       <FormMessage />
@@ -128,71 +113,12 @@ export function PresetActions({ data }: { data: Packages }) {
                 />
                 <FormField
                   control={form.control}
-                  name="receiver_email"
+                  name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Resiver email</FormLabel>
+                      <FormLabel>email</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="adress"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Adress</FormLabel>
-                      <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="weight"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Weight</FormLabel>
-                      <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      {/* <FormDescription>Weight</FormDescription> */}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="to_office"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>To Office</FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          defaultValue={String(field.value)}
-                          className="flex flex-col space-y-1"
-                        >
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="true" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Office</FormLabel>
-                          </FormItem>
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="false" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Client Adress</FormLabel>
-                          </FormItem>
-                        </RadioGroup>
+                        <Input placeholder="email" {...field} />
                       </FormControl>
                       {/* <FormDescription>This is your public display name.</FormDescription> */}
                       <FormMessage />
@@ -216,7 +142,7 @@ export function PresetActions({ data }: { data: Packages }) {
                 formButtonRef.current?.click()
                 setEditDialog(false)
                 toast({
-                  description: 'This preset has been deleted.',
+                  description: 'This preset has been created.',
                 })
               }}
             >
