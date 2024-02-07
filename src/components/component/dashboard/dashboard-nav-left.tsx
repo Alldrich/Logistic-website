@@ -1,8 +1,14 @@
 'use client'
 import Link, { type LinkProps } from 'next/link'
-import { PackageIcon, HomeIcon, UsersIcon, NewspaperIcon, type LucideIcon } from 'lucide-react'
+import {
+  PackageIcon,
+  HomeIcon,
+  UsersIcon,
+  NewspaperIcon,
+  type LucideIcon,
+  Building2Icon,
+} from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
 import type { Route } from 'next'
 
 type LinkGroup = LinkProps<Route> & {
@@ -12,6 +18,11 @@ type LinkGroup = LinkProps<Route> & {
 
 const links: LinkGroup[] = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  {
+    name: 'Company',
+    href: '/dashboard/company',
+    icon: Building2Icon,
+  },
   {
     name: 'Employees',
     href: '/dashboard/employees',

@@ -37,6 +37,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { deleteRows } from '@/lib/delete-rows'
+import { CreatePackage } from './create-package'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -74,13 +75,18 @@ export function ShipmentTable<TData, TValue>({ columns, data }: DataTableProps<T
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter status..."
-          value={(table.getColumn('status')?.getFilterValue() as string) ?? ''}
-          onChange={event => table.getColumn('status')?.setFilterValue(event.target.value)}
-          className="max-w-sm"
-        />
+      <div className="flex items-end py-4">
+        <div className="flex-1">
+          <Input
+            placeholder="Filter status..."
+            value={(table.getColumn('status')?.getFilterValue() as string) ?? ''}
+            onChange={event => table.getColumn('status')?.setFilterValue(event.target.value)}
+            className="max-w-sm"
+          />
+        </div>
+        <div className="mx-5">
+          <CreatePackage />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
