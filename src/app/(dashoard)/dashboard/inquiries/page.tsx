@@ -1,17 +1,17 @@
 import { lusitana } from '@/components/font'
 import { SearchBar } from '@/components/component/search'
 import { cookies } from 'next/headers'
+import type { paths, components } from '@/types/schema'
 
-async function setCoockies() {
-  'use server'
-  if (cookies().has('JSESSIONID') === false) {
-    cookies().set('JSESSIONID', '6FD9325FF41756302EAF84EB429CC12E')
-  }
-}
+// Schema Obj
+type Company = components['schemas']['CompanyDto']
+
+// Path params
+type EndpointParams = paths['/companies']['get']['parameters']
 
 export default async function Inquiries() {
-  // setCoockies();
-  // const data = await fetch('http://localhost:8080/package',{cache: 'no-store'});
-  // console.log(data);
-  return <div>Test</div>
+  // const data = await fetch('http://192.168.0.107/LogisticCompany/Main/Dispatcher',{cache: 'no-store' , method: 'GET',}).then(response => response.json());
+  // console.log("Data" , data);
+  // return <div>{data}</div>
+  return <div>Hello</div>
 }

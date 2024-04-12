@@ -45,6 +45,7 @@ export function LeftNav() {
             <Link
               key={link.name}
               href={link.href}
+              prefetch={true}
               className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
                 pathname === link.href
                   ? 'text-blue-600 drop-shadow-sm transition-all hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-300/40'

@@ -16,3 +16,10 @@ export type Customers = {
   adress: string
   id: string
 }
+
+export type Company = {
+  id: number
+  name: string
+  date_of_foundation: string
+  company_adress: string
+}

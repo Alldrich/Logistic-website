@@ -1,5 +1,7 @@
 import { lusitana } from '@/components/font'
 import { SearchBar } from '@/components/component/search'
+import { Suspense } from 'react'
+import { CustomerPage } from '@/components/component/dashboard/customers/page-data'
 
 export default function Employee() {
   return (
@@ -18,6 +20,10 @@ export default function Employee() {
     //     <Pagination totalPages={totalPages} />
     //   </div>
     // </div>
-    <div>Test</div>
+    <div className="container mx-auto py-10">
+      <Suspense fallback={<div>Loading...</div>}>
+        <CustomerPage />
+      </Suspense>
+    </div>
   )
 }

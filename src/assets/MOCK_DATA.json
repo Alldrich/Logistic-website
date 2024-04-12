@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "name": "Voyatouch",
+        "date_of_foundation": "2/13/2024",
+        "company_adress": "578 Fair Oaks Plaza"
+    },
+    {
+        "id": 2,
+        "name": "Sonsing",
+        "date_of_foundation": "6/17/2023",
+        "company_adress": "0 Barnett Street"
+    },
+    {
+        "id": 3,
+        "name": "Sonair",
+        "date_of_foundation": "11/15/2023",
+        "company_adress": "94833 Becker Hill"
+    },
+    {
+        "id": 4,
+        "name": "Y-Solowarm",
+        "date_of_foundation": "10/27/2023",
+        "company_adress": "66164 Delaware Center"
+    },
+    {
+        "id": 5,
+        "name": "Voyatouch",
+        "date_of_foundation": "6/17/2023",
+        "company_adress": "73469 Coleman Pass"
+    },
+    {
+        "id": 6,
+        "name": "Home Ing",
+        "date_of_foundation": "9/24/2023",
+        "company_adress": "3321 Swallow Terrace"
+    },
+    {
+        "id": 7,
+        "name": "Alpha",
+        "date_of_foundation": "3/23/2023",
+        "company_adress": "6 Stephen Plaza"
+    },
+    {
+        "id": 8,
+        "name": "Voltsillam",
+        "date_of_foundation": "2/8/2024",
+        "company_adress": "79489 American Ash Street"
+    },
+    {
+        "id": 9,
+        "name": "Flowdesk",
+        "date_of_foundation": "2/13/2024",
+        "company_adress": "00 Kennedy Drive"
+    },
+    {
+        "id": 10,
+        "name": "Tin",
+        "date_of_foundation": "4/13/2023",
+        "company_adress": "513 Briar Crest Hill"
+    },
+    {
+        "id": 11,
+        "name": "Quo Lux",
+        "date_of_foundation": "2/26/2023",
+        "company_adress": "08731 Barnett Avenue"
+    },
+    {
+        "id": 12,
+        "name": "Stim",
+        "date_of_foundation": "12/23/2023",
+        "company_adress": "8894 Bowman Point"
+    },
+    {
+        "id": 13,
+        "name": "Transcof",
+        "date_of_foundation": "11/17/2023",
+        "company_adress": "5 Barby Avenue"
+    },
+    {
+        "id": 14,
+        "name": "Konklab",
+        "date_of_foundation": "9/10/2023",
+        "company_adress": "1604 Hanover Lane"
+    },
+    {
+        "id": 15,
+        "name": "Tresom",
+        "date_of_foundation": "7/25/2023",
+        "company_adress": "1347 Evergreen Hill"
+    },
+    {
+        "id": 16,
+        "name": "Tin",
+        "date_of_foundation": "6/10/2023",
+        "company_adress": "812 Kipling Center"
+    },
+    {
+        "id": 17,
+        "name": "Y-find",
+        "date_of_foundation": "3/23/2023",
+        "company_adress": "31639 Spaight Park"
+    },
+    {
+        "id": 18,
+        "name": "Quo Lux",
+        "date_of_foundation": "2/1/2024",
+        "company_adress": "83 Basil Lane"
+    },
+    {
+        "id": 19,
+        "name": "Daltfresh",
+        "date_of_foundation": "3/15/2023",
+        "company_adress": "12965 Bonner Alley"
+    },
+    {
+        "id": 20,
+        "name": "Solarbreeze",
+        "date_of_foundation": "6/22/2023",
+        "company_adress": "0 Butternut Way"
+    },
+    {
+        "id": 21,
+        "name": "Alpha",
+        "date_of_foundation": "5/9/2023",
+        "company_adress": "10169 Pine View Hill"
+    },
+    {
+        "id": 22,
+        "name": "Viva",
+        "date_of_foundation": "1/12/2024",
+        "company_adress": "75313 Waxwing Junction"
+    },
+    {
+        "id": 23,
+        "name": "Namfix",
+        "date_of_foundation": "9/23/2023",
+        "company_adress": "56834 Harbort Pass"
+    },
+    {
+        "id": 24,
+        "name": "Bitchip",
+        "date_of_foundation": "5/21/2023",
+        "company_adress": "714 Westridge Pass"
+    },
+    {
+        "id": 25,
+        "name": "Zaam-Dox",
+        "date_of_foundation": "3/23/2023",
+        "company_adress": "23650 Gerald Crossing"
+    },
+    {
+        "id": 26,
+        "name": "Flexidy",
+        "date_of_foundation": "4/30/2023",
+        "company_adress": "6701 Lerdahl Point"
+    },
+    {
+        "id": 27,
+        "name": "Daltfresh",
+        "date_of_foundation": "2/14/2023",
+        "company_adress": "10829 Barnett Junction"
+    },
+    {
+        "id": 28,
+        "name": "Namfix",
+        "date_of_foundation": "1/15/2024",
+        "company_adress": "71398 Crest Line Crossing"
+    },
+    {
+        "id": 29,
+        "name": "Span",
+        "date_of_foundation": "4/29/2023",
+        "company_adress": "49 Debra Place"
+    },
+    {
+        "id": 30,
+        "name": "Y-Solowarm",
+        "date_of_foundation": "11/25/2023",
+        "company_adress": "69221 Summit Hill"
+    },
+    {
+        "id": 31,
+        "name": "Cardguard",
+        "date_of_foundation": "6/19/2023",
+        "company_adress": "39885 Victoria Road"
+    },
+    {
+        "id": 32,
+        "name": "Flexidy",
+        "date_of_foundation": "6/15/2023",
+        "company_adress": "3 Burning Wood Pass"
+    },
+    {
+        "id": 33,
+        "name": "Overhold",
+        "date_of_foundation": "10/6/2023",
+        "company_adress": "64099 Autumn Leaf Alley"
+    },
+    {
+        "id": 34,
+        "name": "It",
+        "date_of_foundation": "12/8/2023",
+        "company_adress": "828 Elka Hill"
+    },
+    {
+        "id": 35,
+        "name": "Lotlux",
+        "date_of_foundation": "10/5/2023",
+        "company_adress": "5246 North Road"
+    },
+    {
+        "id": 36,
+        "name": "Trippledex",
+        "date_of_foundation": "8/28/2023",
+        "company_adress": "65 Green Plaza"
+    },
+    {
+        "id": 37,
+        "name": "Zathin",
+        "date_of_foundation": "11/8/2023",
+        "company_adress": "0 Prairieview Court"
+    },
+    {
+        "id": 38,
+        "name": "Holdlamis",
+        "date_of_foundation": "7/15/2023",
+        "company_adress": "299 Moland Pass"
+    },
+    {
+        "id": 39,
+        "name": "Sonsing",
+        "date_of_foundation": "3/8/2023",
+        "company_adress": "71 Service Drive"
+    },
+    {
+        "id": 40,
+        "name": "Home Ing",
+        "date_of_foundation": "11/26/2023",
+        "company_adress": "87343 Tennyson Terrace"
+    },
+    {
+        "id": 41,
+        "name": "Y-Solowarm",
+        "date_of_foundation": "12/25/2023",
+        "company_adress": "644 Eastlawn Plaza"
+    },
+    {
+        "id": 42,
+        "name": "Ventosanzap",
+        "date_of_foundation": "3/18/2023",
+        "company_adress": "3832 Moose Drive"
+    },
+    {
+        "id": 43,
+        "name": "Job",
+        "date_of_foundation": "9/20/2023",
+        "company_adress": "340 Truax Center"
+    },
+    {
+        "id": 44,
+        "name": "Lotlux",
+        "date_of_foundation": "6/8/2023",
+        "company_adress": "154 Sommers Trail"
+    },
+    {
+        "id": 45,
+        "name": "Subin",
+        "date_of_foundation": "4/29/2023",
+        "company_adress": "296 Dunning Parkway"
+    },
+    {
+        "id": 46,
+        "name": "Toughjoyfax",
+        "date_of_foundation": "3/31/2023",
+        "company_adress": "0 Iowa Alley"
+    },
+    {
+        "id": 47,
+        "name": "Subin",
+        "date_of_foundation": "11/1/2023",
+        "company_adress": "6662 Quincy Drive"
+    },
+    {
+        "id": 48,
+        "name": "Alpha",
+        "date_of_foundation": "3/21/2023",
+        "company_adress": "7668 Boyd Street"
+    },
+    {
+        "id": 49,
+        "name": "Viva",
+        "date_of_foundation": "10/31/2023",
+        "company_adress": "45 Southridge Place"
+    },
+    {
+        "id": 50,
+        "name": "Y-Solowarm",
+        "date_of_foundation": "3/19/2023",
+        "company_adress": "30743 Southridge Terrace"
+    }
+]
