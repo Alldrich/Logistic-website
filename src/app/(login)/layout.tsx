@@ -1,17 +1,8 @@
-import type { Metadata } from 'next'
 import '@/styles/globals.css'
 import { Footer } from '@/components/component/footer'
 import { ThemeProvider } from '@/components/component/theme-provider'
 import { inter } from '@/components/font'
-import { Suspense } from 'react'
 import { AuthHeader } from '@/components/component/login/header'
-
-export const metadata: Metadata = {
-  title: 'Login - Cargo',
-  description:
-    'Login page for Cargo is a company with many years of experience in transporting and sending parcels of any weight and complexity',
-  keywords: ['Parcel', 'Cargo', 'Transport', 'Courier', 'Login', 'Authentications'],
-}
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,9 +14,18 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
           enableSystem
           disableTransitionOnChange
         >
-          <AuthHeader />
-          <main className="flex-1 bg-background text-foreground">{children}</main>
-          <Footer />
+          <div className="flex min-h-screen flex-col">
+            <div className="bg-alternative flex flex-1 flex-col">
+              <AuthHeader />
+              <div className="flex flex-1">
+                <main className="border-default flex flex-1 flex-shrink-0 flex-col items-center border-r bg-stone-50 px-5 pb-8 pt-16 shadow-lg">
+                  <section className="flex w-[330px] flex-1 flex-col justify-center sm:w-[384px]">
+                    <div className="">{children}</div>
+                  </section>
+                </main>
+              </div>
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
