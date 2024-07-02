@@ -1,0 +1,1398 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+      "title": "LogisticCompany",
+      "version": "1.0"
+  },
+  "paths": {
+      "/auth/register": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/RegistrationData"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK"
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/auth/login": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "parameters": [
+                  {
+                      "name": "useCookies",
+                      "in": "query",
+                      "schema": {
+                          "type": "boolean"
+                      }
+                  },
+                  {
+                      "name": "useSessionCookies",
+                      "in": "query",
+                      "schema": {
+                          "type": "boolean"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/LoginRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/AccessTokenResponse"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/auth/refresh": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/RefreshRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/AccessTokenResponse"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/auth/confirmEmail": {
+          "get": {
+              "tags": [
+                  "auth"
+              ],
+              "operationId": "MapAllIdentityApi-auth/confirmEmail",
+              "parameters": [
+                  {
+                      "name": "userId",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "code",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "changedEmail",
+                      "in": "query",
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK"
+                  }
+              }
+          }
+      },
+      "/auth/resendConfirmationEmail": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK"
+                  }
+              }
+          }
+      },
+      "/auth/forgotPassword": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/ForgotPasswordRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK"
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/auth/resetPassword": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/ResetPasswordRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK"
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/auth/manage/2fa": {
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/TwoFactorRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/TwoFactorResponse"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/auth/manage/info": {
+          "get": {
+              "tags": [
+                  "auth"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/InfoResponse"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          },
+          "post": {
+              "tags": [
+                  "auth"
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/InfoRequest"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/InfoResponse"
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "application/problem+json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      },
+      "/company": {
+          "get": {
+              "tags": [
+                  "Company"
+              ],
+              "operationId": "GetCompanies",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/CompanyDto"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "post": {
+              "tags": [
+                  "Company"
+              ],
+              "operationId": "AddCompany",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/AddCompanyDto"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "201": {
+                      "description": "Created",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/AddCompanyDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/company/all": {
+          "get": {
+              "tags": [
+                  "Company"
+              ],
+              "operationId": "GetAllCompaniesInfo",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/CompanyDto"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/weatherforecast": {
+          "get": {
+              "tags": [
+                  "LogisticCompany"
+              ],
+              "operationId": "GetWeatherForecast",
+              "parameters": [
+                  {
+                      "name": "num",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "integer",
+                          "format": "int32"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/WeatherForecast"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/users": {
+          "get": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "GetUsers",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/UserDto"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "put": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "ChangeUserDto",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "$ref": "#/components/schemas/ChangeUserDto"
+                              }
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/ChangeUserDto"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "post": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "AddUser",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/AddUserDto"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "201": {
+                      "description": "Created",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/CreatedUserDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "DeleteUsers",
+              "responses": {
+                  "204": {
+                      "description": "No Content"
+                  }
+              }
+          }
+      },
+      "/users/{id}": {
+          "get": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "GetUser",
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "type",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/UserDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "put": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "ChangeUser",
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/ChangeUserDto"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ChangeUserDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "DeleteUser",
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "204": {
+                      "description": "No Content"
+                  }
+              }
+          }
+      },
+      "/users/current": {
+          "get": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "GetCurrentUser",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/UserDto"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          },
+          "put": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "UpdateCurrentUser",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/ChangeUserDto"
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ChangeUserDto"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Users"
+              ],
+              "operationId": "DeleteCurrentUser",
+              "responses": {
+                  "204": {
+                      "description": "No Content"
+                  },
+                  "404": {
+                      "description": "Not Found"
+                  }
+              }
+          }
+      }
+  },
+  "components": {
+      "schemas": {
+          "AccessTokenResponse": {
+              "required": [
+                  "accessToken",
+                  "expiresIn",
+                  "refreshToken"
+              ],
+              "type": "object",
+              "properties": {
+                  "tokenType": {
+                      "type": "string",
+                      "nullable": true,
+                      "readOnly": true
+                  },
+                  "accessToken": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "expiresIn": {
+                      "type": "integer",
+                      "format": "int64"
+                  },
+                  "refreshToken": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "AddCompanyDto": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "creationDate": {
+                      "type": "string",
+                      "format": "date",
+                      "nullable": true
+                  },
+                  "address": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "AddUserDto": {
+              "required": [
+                  "email",
+                  "password"
+              ],
+              "type": "object",
+              "properties": {
+                  "firstName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "lastName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "birthDate": {
+                      "type": "string",
+                      "format": "date",
+                      "nullable": true
+                  },
+                  "password": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "address": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "role": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "ChangeUserDto": {
+              "type": "object",
+              "properties": {
+                  "firstName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "lastName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "birthDate": {
+                      "type": "string",
+                      "format": "date",
+                      "nullable": true
+                  },
+                  "password": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "address": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "role": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "CompanyDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "name": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "creationDate": {
+                      "type": "string",
+                      "format": "date"
+                  },
+                  "offices": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/OfficeDto"
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "CreatedUserDto": {
+              "required": [
+                  "email"
+              ],
+              "type": "object",
+              "properties": {
+                  "firstName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "lastName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "birthDate": {
+                      "type": "string",
+                      "format": "date",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "role": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "EmployeeDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "name": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "surname": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "position": {
+                      "$ref": "#/components/schemas/Position"
+                  },
+                  "packages": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/PackageDto"
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "ForgotPasswordRequest": {
+              "required": [
+                  "email"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "HttpValidationProblemDetails": {
+              "type": "object",
+              "properties": {
+                  "type": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "title": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "nullable": true
+                  },
+                  "detail": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "instance": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                          "type": "array",
+                          "items": {
+                              "type": "string"
+                          }
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": {}
+          },
+          "InfoRequest": {
+              "type": "object",
+              "properties": {
+                  "newEmail": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "newPassword": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "oldPassword": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "InfoResponse": {
+              "required": [
+                  "email",
+                  "isEmailConfirmed"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "isEmailConfirmed": {
+                      "type": "boolean"
+                  }
+              },
+              "additionalProperties": false
+          },
+          "LoginRequest": {
+              "required": [
+                  "email",
+                  "password"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "password": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "twoFactorCode": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "twoFactorRecoveryCode": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "OfficeDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "address": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "employees": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/EmployeeDto"
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "PackageDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "string",
+                      "format": "uuid"
+                  },
+                  "trackerNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "status": {
+                      "$ref": "#/components/schemas/PackageStatus"
+                  },
+                  "deliveryDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                  },
+                  "shippingDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                  },
+                  "senderId": {
+                      "type": "string",
+                      "format": "uuid"
+                  },
+                  "receiverId": {
+                      "type": "string",
+                      "format": "uuid"
+                  },
+                  "senderEmployeeId": {
+                      "type": "integer",
+                      "format": "int32",
+                      "nullable": true
+                  },
+                  "receiverEmployeeId": {
+                      "type": "integer",
+                      "format": "int32",
+                      "nullable": true
+                  },
+                  "courierId": {
+                      "type": "integer",
+                      "format": "int32",
+                      "nullable": true
+                  },
+                  "deliveryAddress": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "packageInfo": {
+                      "$ref": "#/components/schemas/PackageInfoDto"
+                  }
+              },
+              "additionalProperties": false
+          },
+          "PackageInfoDto": {
+              "type": "object",
+              "properties": {
+                  "weight": {
+                      "type": "number",
+                      "format": "double"
+                  },
+                  "description": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "fragile": {
+                      "type": "boolean",
+                      "nullable": true
+                  },
+                  "hazardous": {
+                      "type": "boolean",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "PackageStatus": {
+              "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+              ],
+              "type": "integer",
+              "format": "int32"
+          },
+          "Position": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "positionType": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "positionInfo": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "RefreshRequest": {
+              "required": [
+                  "refreshToken"
+              ],
+              "type": "object",
+              "properties": {
+                  "refreshToken": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "RegistrationData": {
+              "required": [
+                  "birthDate",
+                  "email",
+                  "firstName",
+                  "lastName",
+                  "password"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "password": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "firstName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "lastName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "birthDate": {
+                      "type": "string",
+                      "format": "date"
+                  }
+              },
+              "additionalProperties": false
+          },
+          "ResendConfirmationEmailRequest": {
+              "required": [
+                  "email"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "ResetPasswordRequest": {
+              "required": [
+                  "email",
+                  "newPassword",
+                  "resetCode"
+              ],
+              "type": "object",
+              "properties": {
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "resetCode": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "newPassword": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "TwoFactorRequest": {
+              "type": "object",
+              "properties": {
+                  "enable": {
+                      "type": "boolean",
+                      "nullable": true
+                  },
+                  "twoFactorCode": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "resetSharedKey": {
+                      "type": "boolean"
+                  },
+                  "resetRecoveryCodes": {
+                      "type": "boolean"
+                  },
+                  "forgetMachine": {
+                      "type": "boolean"
+                  }
+              },
+              "additionalProperties": false
+          },
+          "TwoFactorResponse": {
+              "required": [
+                  "isMachineRemembered",
+                  "isTwoFactorEnabled",
+                  "recoveryCodesLeft",
+                  "sharedKey"
+              ],
+              "type": "object",
+              "properties": {
+                  "sharedKey": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "recoveryCodesLeft": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "recoveryCodes": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      },
+                      "nullable": true
+                  },
+                  "isTwoFactorEnabled": {
+                      "type": "boolean"
+                  },
+                  "isMachineRemembered": {
+                      "type": "boolean"
+                  }
+              },
+              "additionalProperties": false
+          },
+          "UserDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "nullable": true
+                  },
+                  "firstName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "lastName": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "email": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "birthDate": {
+                      "type": "string",
+                      "format": "date",
+                      "nullable": true
+                  },
+                  "phoneNumber": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "adress": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "roles": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "WeatherForecast": {
+              "type": "object",
+              "properties": {
+                  "date": {
+                      "type": "string",
+                      "format": "date"
+                  },
+                  "temperatureC": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "temperatureF": {
+                      "type": "integer",
+                      "format": "int32",
+                      "readOnly": true
+                  },
+                  "summary": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          }
+      }
+  }
+}

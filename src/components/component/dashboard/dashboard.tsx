@@ -1,3 +1,4 @@
+'use client'
 import {
   TableHead,
   TableRow,
@@ -7,60 +8,32 @@ import {
   Table,
 } from '@/components/ui/table'
 import type React from 'react'
+import { LineChart, type ValueFormatter } from '@tremor/react'
+import type { CompanyRevenue } from '@/types/dashboard'
 
-export function Component() {
+const valueFormatter: ValueFormatter = function (number) {
+  return '$ ' + new Intl.NumberFormat('us').format(number).toString()
+}
+
+export function Component({ data }: { data: CompanyRevenue[] }) {
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Recent Shipments</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Company Revenues</h1>
       </div>
       <div className=" rounded-lg border shadow-sm">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[80px]">Order Number</TableHead>
-              <TableHead className="max-w-[150px]">Status</TableHead>
-              <TableHead className="hidden md:table-cell">Current Location</TableHead>
-              <TableHead className="hidden md:table-cell">End Point</TableHead>
-              <TableHead>Client Name</TableHead>
-              <TableHead>Estimated Time</TableHead>
-              <TableHead>Departure Time</TableHead>
-              <TableHead>Arrival Time</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>#001</TableCell>
-              <TableCell className="font-medium">Delivered</TableCell>
-              <TableCell className="hidden md:table-cell">N/A</TableCell>
-              <TableCell>New York, NY</TableCell>
-              <TableCell className="hidden md:table-cell">John Doe</TableCell>
-              <TableCell>N/A</TableCell>
-              <TableCell>8:00 AM</TableCell>
-              <TableCell>12:00 PM</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>#002</TableCell>
-              <TableCell className="font-medium">On Delivery</TableCell>
-              <TableCell className="hidden md:table-cell">Los Angeles, CA</TableCell>
-              <TableCell>San Francisco, CA</TableCell>
-              <TableCell className="hidden md:table-cell">Jane Smith</TableCell>
-              <TableCell>5 hours</TableCell>
-              <TableCell>9:00 AM</TableCell>
-              <TableCell>N/A</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>#003</TableCell>
-              <TableCell className="font-medium">Canceled</TableCell>
-              <TableCell className="hidden md:table-cell">N/A</TableCell>
-              <TableCell>Chicago, IL</TableCell>
-              <TableCell className="hidden md:table-cell">Bob Johnson</TableCell>
-              <TableCell>N/A</TableCell>
-              <TableCell>N/A</TableCell>
-              <TableCell>N/A</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+          Newsletter revenue over time (USD)
+        </h3>
+        <LineChart
+          className="mt-4 h-72"
+          data={data}
+          index="date"
+          yAxisWidth={65}
+          categories={['revenue']}
+          colors={['indigo', 'cyan']}
+          valueFormatter={valueFormatter}
+        />
       </div>
     </main>
   )

@@ -2,59 +2,142 @@
 import { z } from 'zod'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
+import type { Employee, Positions } from '@/types/dashboard'
 
-const FormSchema = z.object({
-  id: z.string(),
-  customerId: z.string(),
-  amount: z.coerce.number(),
-  status: z.enum(['pending', 'paid']),
-  date: z.string(),
-})
-
-const CreateInvoice = FormSchema.omit({ id: true, date: true })
-const UpdateInvoice = FormSchema.omit({ id: true, date: true })
-
-export async function createInvoice(formData: FormData) {
-  const { customerId, amount, status } = CreateInvoice.parse({
-    customerId: formData.get('customerId'),
-    amount: formData.get('amount'),
-    status: formData.get('status'),
-  })
-  // Test it out:
-  const amountInCents = amount * 100
-  const date = new Date().toISOString().split('T')[0]
-  var result = await fetch('/api/invoices', {
-    method: 'POST',
-    body: JSON.stringify({ customerId, amountInCents, status, date }),
-  })
-  //   await sql`
-  //   INSERT INTO invoices (customer_id, amount, status, date)
-  //   VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
-  // `;
-  revalidatePath('/dashboard/invoices')
-  redirect('/dashboard/invoices')
+export async function GetPositions() {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  try {
+    const response = await fetch('http://localhost:7028/position', {
+      next: { revalidate: 30 },
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+      },
+    })
+    let result: Positions = await response.json()
+    return result
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
 }
 
-export async function updateInvoice(id: string, formData: FormData) {
-  const { customerId, amount, status } = UpdateInvoice.parse({
-    customerId: formData.get('customerId'),
-    amount: formData.get('amount'),
-    status: formData.get('status'),
-  })
-
-  const amountInCents = amount * 100
-
-  // await sql`
-  //   UPDATE invoices
-  //   SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
-  //   WHERE id = ${id}
-  // `;
-
-  revalidatePath('/dashboard/invoices')
-  redirect('/dashboard/invoices')
+export async function GetEmployees() {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  try {
+    const response = await fetch('http://localhost:7028/employee', {
+      cache: 'no-store',
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+      },
+    })
+    let result: Employee[] = await response.json()
+    return result
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
 }
 
-export async function deleteInvoice(id: string) {
-  // await sql`DELETE FROM invoices WHERE id = ${id}`;
-  revalidatePath('/dashboard/invoices')
+export async function AddEmployeePartial(data: FormData) {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  let add_data = JSON.stringify({
+    id: data.get('id'),
+    salary: data.get('salary'),
+    positionId: data.get('positionId'),
+    officeId: data.get('officeId'),
+  })
+  console.log(add_data)
+  try {
+    const response = await fetch('http://localhost:7028/employee', {
+      cache: 'no-store',
+      method: 'POST',
+      credentials: 'include',
+      body: add_data,
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+      },
+    })
+    let result = await response.json()
+    return result
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+  redirect('http://localhost:3000/dashboard/employees')
+}
+
+export async function changeEmployeeDataById(data: FormData) {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  let change_data = JSON.stringify({
+    id: data.get('id'),
+    salary: data.get('salary'),
+    positionId: data.get('positionId'),
+    officeId: data.get('officeId'),
+  })
+  let url = `http://localhost:7028/employee/${data.get('id')} `
+  try {
+    const response = await fetch(url, {
+      cache: 'no-store',
+      method: 'PUT',
+      credentials: 'include',
+      body: change_data,
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+      },
+    })
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+  redirect('http://localhost:3000/dashboard/employees')
+}
+
+export async function DeleteEmployeeById(id: string) {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  let url = `http://localhost:7028/employee/${id}`
+  try {
+    const response = await fetch(url, {
+      cache: 'no-store',
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+      },
+    })
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    var res = await response.json()
+    console.log(res)
+    return res
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+  redirect('http://localhost:3000/dashboard/employees')
+}
+
+export const position_fetcher = async (url: string) => {
+  var cookie = cookies().get('.AspNetCore.Identity.Application')
+  const response = await fetch(url, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: `.AspNetCore.Identity.Application=${cookie?.value}`,
+    },
+  })
+  if (!response.ok) {
+    throw new Error('An error occurred while fetching the data.')
+  }
+  var result: Positions = await response.json()
+  return result
 }

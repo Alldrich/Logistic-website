@@ -17,7 +17,7 @@ import {
 import { Input, type InputProps } from '@/components/ui/input'
 
 const FormSchema = z.object({
-  track_number: z.string().min(10, {
+  track_number: z.string().min(12, {
     message: 'Tracking number must be at least 10 characters.',
   }),
 })
@@ -35,7 +35,6 @@ export function TrackForm({ className }: InputProps) {
       <form
         action={async (formData: FormData) => {
           const valid = await form.trigger()
-          console.log('Button is clicked')
           if (!valid) return
           return submitAction(formData)
         }}
@@ -46,13 +45,9 @@ export function TrackForm({ className }: InputProps) {
           name="track_number"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel className="">Tracking Number</FormLabel> */}
               <FormControl>
                 <Input className={className} placeholder="Tracking Number" {...field} />
               </FormControl>
-              {/* <FormDescription >
-                Enter the parcel tracking number.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}

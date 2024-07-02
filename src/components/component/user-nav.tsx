@@ -1,5 +1,7 @@
+'use client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +10,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import Link from 'next/link'
+} from '../ui/dropdown-menu'
+import { GetCurrentUser, signOut } from '@/lib/auth_actions'
+import type { paths, components } from '@/types/schemav2'
+import { usePathname } from 'next/navigation'
 
-export function UserNav() {
+type User = components['schemas']['UserDto'] | null | undefined
+
+export function UserNav({ user }: { user: User }) {
+  const pathname = usePathname()
+  console.log(pathname)
+  if (user === undefined || user === null) {
+    return (
+      <Button variant={'outline'} asChild>
+        <Link role="link" href="/sign-in">
+          Sign in
+        </Link>
+      </Button>
+    )
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -22,7 +39,7 @@ export function UserNav() {
               className="rounded-full"
               height="32"
               width="32"
-              alt="@username"
+              alt={user.email!}
               style={{
                 aspectRatio: '32/32',
                 objectFit: 'cover',
@@ -35,19 +52,29 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Alice Brown</p>
-            <p className="text-xs leading-none text-muted-foreground">alice@example.com</p>
+            <p className="text-sm font-medium leading-none">
+              {user.firstName + ' ' + user.lastName}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/dashboard">Dashboard</Link>
+          {pathname === '/dashboard' ? (
+            <DropdownMenuItem asChild>
+              <Link href="/">Home</Link>
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem asChild>
+            <Link href="/profile">Profile</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Log out</DropdownMenuItem>
+        <DropdownMenuItem onClick={async () => await signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

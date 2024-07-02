@@ -6,6 +6,7 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
 })
 
 const nextConfig = withBundleAnalyzerConfig({
+  crossOrigin: 'anonymous',
   images: {
     remotePatterns: [
       {

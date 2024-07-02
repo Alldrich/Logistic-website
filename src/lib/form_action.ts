@@ -1,6 +1,7 @@
 'use server'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
+import { redirect } from 'next/navigation'
 
 const FormSchema = z.object({
   track_number: z.string().min(10, {
@@ -9,7 +10,7 @@ const FormSchema = z.object({
 })
 
 export async function submitAction(data: FormData) {
-  console.log('submitAction', data)
+  redirect(`http://localhost:3000/package/${data.get('track_number')}`)
 }
 
 export async function changeShipmentData(data: FormData) {
