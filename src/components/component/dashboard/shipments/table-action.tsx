@@ -27,6 +27,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -34,47 +35,59 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import type { Packages } from '@/types/dashboard'
+import type { Package, Packages } from '@/types/dashboard'
 import { changeShipmentData } from '@/lib/form_action'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  changePackageDataById,
+  DeletePackageById,
+  package_status_fetcher,
+} from '@/lib/package_actions'
+import useSWR from 'swr'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const formSchema = z.object({
-  sender_email: z.string().min(2, {
-    message: 'Please enter a valid email address.',
-  }),
-  receiver_email: z.string().min(2, {
-    message: 'Please enter a valid email address.',
-  }),
-  adress: z.string().min(10, {
-    message: 'Adress must be at least 2 characters.',
-  }),
-  weight: z.string().min(1, {
-    message: 'Weight must be at least 1.',
-  }),
-  to_office: z.string().refine(val => val === 'true' || val === 'false'),
+  status: z.string(),
+  address: z.string(),
+  toAdress: z.boolean().default(false),
 })
 
-async function handleSubmit(data: z.infer<typeof formSchema>) {
-  let formData = new FormData()
-  formData.append('sender_email', data.sender_email)
-  formData.append('receiver_email', data.receiver_email)
-  formData.append('adress', data.adress)
-  formData.append('weight', String(data.weight))
-  formData.append('to_office', data.to_office)
-  await changeShipmentData(formData)
+function usePackageStatus() {
+  const { data } = useSWR('http://localhost:7028/package/status', package_status_fetcher, {
+    refreshInterval: 60000,
+  })
+  return {
+    statuses: data,
+  }
 }
 
-export function ShipmentTableActions({ data }: { data: Packages }) {
+export function ShipmentTableActions({ package_ }: { package_: Package }) {
+  async function handleSubmit(data: z.infer<typeof formSchema>, id: string) {
+    let formData = new FormData()
+    formData.append('status', data.status)
+    formData.append('address', data.address)
+    formData.append('toAdress', String(data.toAdress))
+    await changePackageDataById(formData, id)
+  }
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    await handleSubmit(data, package_.id!)
+  }
+  const { statuses } = usePackageStatus()
   const [showEditDialog, setEditDialog] = React.useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      sender_email: data.Sender,
-      receiver_email: data.Resiver,
-      adress: data.adress,
-      weight: String(data.weight),
-      to_office: String(data.ToOffice),
+      status: package_.status ?? '',
+      toAdress: package_.toAdress ?? false,
+      address: package_.deliveryAddress ?? '',
     },
   })
   const formButtonRef = React.useRef<HTMLButtonElement>(null)
@@ -92,7 +105,7 @@ export function ShipmentTableActions({ data }: { data: Packages }) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => {
-              navigator.clipboard.writeText(data.id)
+              navigator.clipboard.writeText(package_.trackingNumber ?? '')
             }}
           >
             Copy shipment ID
@@ -111,90 +124,57 @@ export function ShipmentTableActions({ data }: { data: Packages }) {
           </AlertDialogHeader>
           <>
             <Form {...form}>
-              <form ref={formRef} onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                   control={form.control}
-                  name="sender_email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sender email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="receiver_email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Resiver email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                      </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="adress"
+                  name="address"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Adress</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="adress" {...field} />
                       </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
-                  name="weight"
+                  name="toAdress"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Weight</FormLabel>
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
-                      {/* <FormDescription>Weight</FormDescription> */}
-                      <FormMessage />
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Delivery to Custom Address</FormLabel>
+                        <FormDescription>
+                          Set it if you want to deliver it to your address
+                        </FormDescription>
+                      </div>
                     </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
-                  name="to_office"
+                  name="status"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>To Office</FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          defaultValue={String(field.value)}
-                          className="flex flex-col space-y-1"
-                        >
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="true" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Office</FormLabel>
-                          </FormItem>
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="false" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Client Adress</FormLabel>
-                          </FormItem>
-                        </RadioGroup>
-                      </FormControl>
-                      {/* <FormDescription>This is your public display name.</FormDescription> */}
+                      <FormLabel>Status</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a valid status to add" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {statuses?.map(status => (
+                            <SelectItem key={status.id} value={status.status!}>
+                              {status.status!}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -216,7 +196,7 @@ export function ShipmentTableActions({ data }: { data: Packages }) {
                 formButtonRef.current?.click()
                 setEditDialog(false)
                 toast({
-                  description: 'This preset has been deleted.',
+                  description: 'This preset has been edited.',
                 })
               }}
             >
@@ -238,7 +218,8 @@ export function ShipmentTableActions({ data }: { data: Packages }) {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <Button
               variant="destructive"
-              onClick={() => {
+              onClick={async () => {
+                await DeletePackageById(package_.id!)
                 toast({
                   description: 'This preset has been deleted.',
                 })

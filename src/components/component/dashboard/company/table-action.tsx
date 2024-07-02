@@ -36,25 +36,25 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import type { Company } from '@/types/dashboard'
 import { changeCustomerData } from '@/lib/form_action'
+import { changeCompanyDataById } from '@/lib/company_actions'
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Please enter a valid name.',
   }),
   address: z.string().min(2, {
-    message: 'Please enter a valid email address.',
+    message: 'Please enter a valid address.',
   }),
+  id: z.string(),
 })
 
 async function handleSubmit(data: z.infer<typeof formSchema>) {
   let formData = new FormData()
   formData.append('name', data.name)
-  formData.append('email', data.address)
-  await changeCustomerData(formData)
-  eror = false
+  formData.append('address', data.address)
+  formData.append('id', data.id.toString())
+  await changeCompanyDataById(formData)
 }
-
-var eror = true
 
 export function CompanyTableActions({ data }: { data: Company }) {
   const [showEditDialog, setEditDialog] = React.useState(false)
@@ -64,8 +64,9 @@ export function CompanyTableActions({ data }: { data: Company }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      address: '',
+      name: data?.name ?? '',
+      address: data?.address ?? '',
+      id: data?.id?.toString(),
     },
   })
 
@@ -86,7 +87,7 @@ export function CompanyTableActions({ data }: { data: Company }) {
               navigator.clipboard.writeText(String(data.id))
             }}
           >
-            Copy client ID
+            Copy company ID
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setEditDialog(true)}>Edit</DropdownMenuItem>
@@ -131,6 +132,20 @@ export function CompanyTableActions({ data }: { data: Company }) {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="id"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>id</FormLabel>
+                      <FormControl>
+                        <Input disabled placeholder="id" {...field} />
+                      </FormControl>
+                      {/* <FormDescription>This is your public display name.</FormDescription> */}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <Button
                   className="hidden"
                   variant={'ghost'}
@@ -146,12 +161,10 @@ export function CompanyTableActions({ data }: { data: Company }) {
               variant="outline"
               onClick={() => {
                 formButtonRef.current?.click()
-                if (eror == false) {
-                  setEditDialog(eror)
-                  toast({
-                    description: 'This preset has been created.',
-                  })
-                }
+                setEditDialog(false)
+                toast({
+                  description: 'This preset has been created.',
+                })
               }}
             >
               Submit

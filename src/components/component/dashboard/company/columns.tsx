@@ -45,13 +45,13 @@ export const companyColumns: ColumnDef<Company>[] = [
     cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
   },
   {
-    accessorKey: 'company_adress',
-    cell: ({ row }) => <div className="lowercase">{row.getValue('company_adress')}</div>,
+    accessorKey: 'address',
+    cell: ({ row }) => <div className="lowercase">{row.getValue('address')}</div>,
   },
   {
-    accessorKey: 'date_of_foundation',
+    accessorKey: 'creationDate',
     header: () => <div className="">Date of Creation</div>,
-    cell: ({ row }) => <div className="lowercase">{row.getValue('date_of_foundation')}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('creationDate')}</div>,
   },
   {
     id: 'actions',

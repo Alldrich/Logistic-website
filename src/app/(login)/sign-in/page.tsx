@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import { LoginForm } from '@/components/component/login/login-ui'
-import dl from '@/assets/delivery_guy_min.jpg'
 import type { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
@@ -11,5 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default function LoginPage() {
-  return <LoginForm />
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  )
 }

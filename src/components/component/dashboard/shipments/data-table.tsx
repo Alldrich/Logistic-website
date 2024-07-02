@@ -112,9 +112,9 @@ export function ShipmentTable<TData, TValue>({ columns, data }: DataTableProps<T
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="max-w-6xl rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="h-16">
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {

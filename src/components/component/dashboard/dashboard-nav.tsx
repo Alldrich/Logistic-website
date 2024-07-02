@@ -14,7 +14,10 @@ import Image from 'next/image'
 import { LeftNav } from '@/components/component/dashboard/dashboard-nav-left'
 import { MobileNav } from '@/components/component/dashboard/dashboard-nav-mobile'
 import { UserNav } from '@/components/component/user-nav'
-export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
+import { GetCurrentUser } from '@/lib/auth_actions'
+
+export async function MainDashboardNav({ children }: { children?: React.ReactNode }) {
+  let user = await GetCurrentUser()
   return (
     <main key="1" className=" grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="dark:to-dark hidden border-r bg-gradient-to-b from-gray-100/40 to-white dark:bg-gradient-to-b dark:from-gray-800/40 lg:block">
@@ -29,31 +32,15 @@ export function MainDashboardNav({ children }: { children?: React.ReactNode }) {
               <span className="sr-only">Toggle notifications</span>
             </Button>
           </div>
-          <LeftNav />
+          <LeftNav user={user!} />
         </div>
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 lg:h-[60px]">
-          {/* <Link className="lg:hidden" href="#">
-            <PackageIcon className="h-6 w-6" />
-            <span className="sr-only">Home</span>
-          </Link> */}
-          {/* <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
-                <Input
-                  className="w-full appearance-none bg-white pl-8 shadow-none dark:bg-gray-950 md:w-2/3 lg:w-1/3"
-                  placeholder="Search..."
-                  type="search"
-                />
-              </div>
-            </form>
-          </div> */}
           <div className="w-full flex-1">
-            <MobileNav />
+            <MobileNav user={user!} />
           </div>
-          <UserNav />
+          <UserNav user={user} />
         </header>
         {children}
       </div>

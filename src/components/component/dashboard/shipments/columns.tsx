@@ -1,11 +1,13 @@
 'use client'
 
 import { type ColumnDef } from '@tanstack/react-table'
-import type { Packages } from '@/types/dashboard'
+import type { Package, Packages } from '@/types/dashboard'
 import { ShipmentTableActions } from './table-action'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Badge } from '@/components/ui/badge'
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -33,7 +35,7 @@ import { CaretSortIcon } from '@radix-ui/react-icons'
 //   }
 // ]
 
-export const shipmentColumns: ColumnDef<Packages>[] = [
+export const shipmentColumns: ColumnDef<Package>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -56,12 +58,17 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
+    accessorKey: 'trackingNumber',
+    header: 'Tracking Number',
+    cell: ({ row }) => <div className="capitalize">{row.getValue('trackingNumber')}</div>,
   },
   {
-    accessorKey: 'Sender',
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => <Badge>{row.getValue('status')}</Badge>,
+  },
+  {
+    accessorKey: 'senderEmail',
     header: ({ column }) => {
       return (
         <Button
@@ -73,34 +80,47 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('Sender')}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('senderEmail')}</div>,
   },
   {
-    accessorKey: 'weight',
-    header: () => <div className="">Weight</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('weight'))
-
-      return <div className="font-medium">{amount}</div>
-    },
-  },
-  {
-    accessorKey: 'Resiver',
+    accessorKey: 'receiverEmail',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Resiver
+          Receiver
           <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('Resiver')}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('receiverEmail')}</div>,
   },
   {
-    accessorKey: 'adress',
+    accessorKey: 'packageInfo.weight',
+    header: () => <div className="">Weight</div>,
+    cell: ({ row }) => {
+      const value = row.original.packageInfo?.weight
+      return <div className="font-medium">{value}</div>
+    },
+  },
+  {
+    accessorKey: 'price',
+    header: () => <div className="">Price</div>,
+    cell: ({ row }) => {
+      return <div className="font-medium">{row.getValue('price')}</div>
+    },
+  },
+  {
+    accessorKey: 'companyName',
+    header: () => <div className="">Comapany Name</div>,
+    cell: ({ row }) => {
+      return <div className="font-medium">{row.getValue('companyName')}</div>
+    },
+  },
+  {
+    accessorKey: 'deliveryAddress',
     header: ({ column }) => {
       return (
         <Button
@@ -112,14 +132,68 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('adress')}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue('deliveryAddress')}</div>,
+  },
+  {
+    accessorKey: 'toAdress',
+    header: 'To User Adress',
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue('toAdress') ? 'true' : 'false'}</div>
+    ),
+  },
+  {
+    accessorKey: 'courierId',
+    header: 'Courier Id',
+    cell: ({ row }) => <div className="">{row.getValue('courierId')}</div>,
+  },
+  {
+    accessorKey: 'registarEmployeeEmail',
+    header: 'Registrar',
+    cell: ({ row }) => <div className="">{row.getValue('registarEmployeeEmail')}</div>,
+  },
+  {
+    accessorKey: 'deliveryDate',
+    header: 'Delivery Date',
+    cell: ({ row }) => <div className="capitalize">{row.getValue('deliveryDate')}</div>,
+  },
+  {
+    accessorKey: 'shippingDate',
+    header: 'Shipping Date',
+    cell: ({ row }) => <div className="capitalize">{row.getValue('shippingDate')}</div>,
+  },
+  {
+    accessorKey: 'packageInfo.fragile',
+    header: 'Fragile',
+    cell: ({ row }) => {
+      const isFragile = row.original.packageInfo?.fragile
+      return <div className="capitalize">{isFragile ? 'true' : 'false'}</div>
+    },
+  },
+  {
+    accessorKey: 'packageInfo.hazardous',
+    header: 'Hazardous',
+    cell: ({ row }) => {
+      const isHazardous = row.original.packageInfo?.hazardous
+      return <div className="capitalize">{isHazardous ? 'true' : 'false'}</div>
+    },
+  },
+  {
+    accessorKey: 'packageInfo.description',
+    header: 'Description',
+    cell: ({ row }) => {
+      const Description = row.original.packageInfo?.description
+      return (
+        <ScrollArea>
+          <div className="capitalize">{Description}</div>
+        </ScrollArea>
+      )
+    },
   },
   {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
       const payment = row.original
-
       return (
         // <DropdownMenu>
         //   <DropdownMenuTrigger asChild>
@@ -140,7 +214,7 @@ export const shipmentColumns: ColumnDef<Packages>[] = [
         //     <DropdownMenuItem>View payment details</DropdownMenuItem>
         //   </DropdownMenuContent>
         // </DropdownMenu>
-        <ShipmentTableActions data={payment} />
+        <ShipmentTableActions package_={payment} />
       )
     },
   },

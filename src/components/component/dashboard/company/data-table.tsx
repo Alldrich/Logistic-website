@@ -37,7 +37,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { deleteRows } from '@/lib/delete-rows'
-import { CreatePackage } from './create-package'
+import { CreateCompany } from './create-company'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -85,7 +85,7 @@ export function CompanyTable<TData, TValue>({ columns, data }: DataTableProps<TD
           />
         </div>
         <div className="mx-5">
-          <CreatePackage />
+          <CreateCompany />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

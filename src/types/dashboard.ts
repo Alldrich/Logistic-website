@@ -1,25 +1,36 @@
-export type Packages = {
-  createdAt: string
-  Sender: string
-  Resiver: string
-  adress: string
-  status: string
-  weight: number
-  ToOffice: boolean
-  id: string
-}
+import type { components, paths } from '@/types/schemav2'
+
+export type Users = paths['/users']['get']['responses']['200']['content']['application/json']
+export type User = paths['/users/{id}']['get']['responses']['200']['content']['application/json']
+export type CreatedUser = paths['/users']['post']['responses']['201']['content']['application/json']
+export type Roles = paths['/role']['get']['responses']['200']['content']['application/json']
+export type Companies = paths['/company']['get']['responses']['200']['content']['application/json']
+export type Company =
+  paths['/company/{id}']['get']['responses']['200']['content']['application/json']
+export type Offices = paths['/office']['get']['responses']['200']['content']['application/json']
+export type Office = paths['/office/{id}']['get']['responses']['200']['content']['application/json']
+export type Employee =
+  paths['/employee/{id}']['get']['responses']['200']['content']['application/json']
+export type Positions = paths['/position']['get']['responses']['200']['content']['application/json']
+export type ChangeEmployee =
+  paths['/employee/{id}']['put']['requestBody']['content']['application/json']
+export type Packages = paths['/package']['get']['responses']['200']['content']['application/json']
+export type Package =
+  paths['/package/{id}']['get']['responses']['200']['content']['application/json']
+export type PackageInfo = components['schemas']['PackageInfo']
+export type PackageCreate = components['schemas']['AddPackageDto']
+export type PackageStatuses =
+  paths['/package/status']['get']['responses']['200']['content']['application/json']
+export type CompanyRevenue = components['schemas']['CompanyRevenue']
+export type TrackedPackage =
+  paths['/package/track/{id}']['get']['responses']['200']['content']['application/json']
 
 export type Customers = {
-  createdAt: string
+  id: string
   name: string
   email: string
-  adress: string
-  id: string
-}
-
-export type Company = {
-  id: number
-  name: string
-  date_of_foundation: string
-  company_adress: string
+  phone: string
+  address: string
+  company: string
+  created: string
 }

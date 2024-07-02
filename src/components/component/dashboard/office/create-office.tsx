@@ -26,30 +26,45 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { changeCustomerData } from '@/lib/form_action'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { createCompanyPartial } from '@/lib/company_actions'
+import type { Companies } from '@/types/dashboard'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { createOfficePartial } from '@/lib/office_actions'
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Please enter a valid email address.',
+  address: z.string().min(2, {
+    message: 'Please enter a valid company name.',
   }),
-  email: z.string().min(2, {
-    message: 'Please enter a valid email address.',
+  phoneNumber: z.string().min(2, {
+    message: 'Please enter a valid address .',
+  }),
+  company: z.string().min(2, {
+    message: 'Please enter a valid address .',
   }),
 })
 
 async function handleSubmit(data: z.infer<typeof formSchema>) {
   let formData = new FormData()
-  formData.append('name', data.name)
-  formData.append('email', data.email)
-  await changeCustomerData(formData)
+  formData.append('address', data.address)
+  formData.append('phoneNumber', data.phoneNumber)
+  formData.append('companyName', data.company)
+  await createOfficePartial(formData)
 }
 
-export function CreatePackage() {
+export function CreateOffice({ data }: { data: Companies }) {
   const [showEditDialog, setEditDialog] = React.useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      email: '',
+      phoneNumber: '',
+      address: '',
+      company: data?.[0]?.name ?? '',
     },
   })
   const formButtonRef = React.useRef<HTMLButtonElement>(null)
@@ -68,12 +83,12 @@ export function CreatePackage() {
               <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="address"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Address</FormLabel>
                       <FormControl>
-                        <Input placeholder="name" {...field} />
+                        <Input placeholder="address" {...field} />
                       </FormControl>
                       {/* <FormDescription>This is your public display name.</FormDescription> */}
                       <FormMessage />
@@ -82,14 +97,38 @@ export function CreatePackage() {
                 />
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="phoneNumber"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>email</FormLabel>
+                      <FormLabel>Phone Number</FormLabel>
                       <FormControl>
-                        <Input placeholder="email" {...field} />
+                        <Input placeholder="phone" {...field} />
                       </FormControl>
                       {/* <FormDescription>This is your public display name.</FormDescription> */}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Roles</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a valid role to add" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {data?.map(company => (
+                            <SelectItem key={company.id} value={company.name!}>
+                              {company.name!}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
